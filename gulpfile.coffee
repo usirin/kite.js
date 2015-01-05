@@ -107,6 +107,7 @@ gulp.task 'browserify kite as promised', ->
   browserify
     entries     : ['./src/kite-as-promised/kite.coffee']
     debug       : no
+    standalone  : 'kite'
   .require 'events'
   .require './src/kite/kite.coffee'
   .require './src/kite-as-promised/kite.coffee', expose: 'kite'
@@ -125,6 +126,7 @@ gulp.task 'browserify kontrol', ->
   browserify
     entries     : ['./src/kontrol/kontrol.coffee']
     debug       : no
+    standalone  : 'kloud'
   .external 'events'
   .external './src/kite/kite.coffee'
   .require './src/kontrol/kontrol.coffee', expose: 'kontrol'
