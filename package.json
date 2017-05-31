@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "clean": "rm -rf lib",
-    "test": "./node_modules/mocha/bin/_mocha --reporter spec --compilers coffee:coffee-script/register",
+    "test": "./node_modules/mocha/bin/_mocha --reporter spec --compilers coffee:coffee-script/register 'src/**/*.test.coffee'",
     "test:watch": "npm test -- --watch",
     "build:watch": "./node_modules/coffee-script/bin/coffee --no-header -o lib -wbc src",
     "build:lib": "./node_modules/coffee-script/bin/coffee --no-header -o lib -bc src",
