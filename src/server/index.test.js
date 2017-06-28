@@ -43,6 +43,31 @@ describe('KiteServer with SockJS', () => {
 })
 
 describe('KiteServer with WebSocket', () => {
+  describe('api definition', () => {
+    it('uses kite auth option if method is defined as function', () => {
+      const api = {
+        square: function(x, callback) {
+          callback(null, x * x)
+        },
+      }
+
+      const math = new KiteServer({
+        name: 'math',
+        // use a custom authentication for test
+        auth: { foo: 'bar' },
+        logLevel,
+        api: api,
+      })
+
+      console.log(math.api)
+
+      expect(math.api.square).toBe(api.square)
+      expect(math.api.square.mustAuth).toEqual({ foo: 'bar' })
+
+      math.close()
+    })
+  })
+
   it('should be able to accept kite connections', done => {
     const kite = new Kite({
       url: 'ws://0.0.0.0:7780',
