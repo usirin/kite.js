@@ -141,6 +141,45 @@ describe('kite operations', () => {
       })
     })
   })
+
+  describe('kite.tell()', () => {
+    it('accepts arguments as array', done => {
+      const server = new KiteServer({
+        name: 'server',
+        auth: false,
+        logLevel,
+        api: {
+          zeroArg(callback) {
+            callback(null, true)
+          },
+          oneArg(arg1, callback) {
+            callback(null, { arg1 })
+          },
+          twoArgs(arg1, arg2, callback) {
+            callback(null, { arg1, arg2 })
+          },
+        },
+      })
+
+      withServer({ server }, (kite, server) => {
+        Promise.all([
+          kite.tell('zeroArg', []),
+          kite.tell('oneArg', ['foo']),
+          kite.tell('twoArgs', ['foo', 'bar']),
+        ])
+          .then(([res1, res2, res3]) => {
+            expect(res1).toBe(true)
+            expect(res2).toEqual({ arg1: 'foo' })
+            expect(res3).toEqual({ arg1: 'foo', arg2: 'bar' })
+          })
+          .then(() => {
+            kite.disconnect()
+            server.close()
+          })
+          .then(() => done())
+      })
+    })
+  })
 })
 
 const withServer = (options, callback) => {
