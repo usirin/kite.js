@@ -19,10 +19,10 @@
     "build": "babel src --source-maps --out-dir lib",
     "build:watch": "babel src --watch --source-maps --out-dir lib",
     "prepublish": "npm run format:all && npm run test && npm run bundle",
-    "format:single": "prettier --single-quote --trailing-comma es5 --no-semi --write",
-    "format:all": "prettier --single-quote --trailing-comma es5 --no-semi --write 'src/**/*.js'",
-    "format:check:single": "prettier --single-quote --trailing-comma es5 --no-semi --list-different",
-    "format:check:all": "prettier --single-quote --trailing-comma es5 --no-semi --list-different 'src/**/*.js'"
+    "format": "prettier --single-quote --trailing-comma es5 --no-semi --write",
+    "format:all": "npm run format -- 'src/**/*.js'",
+    "format:check": "prettier --single-quote --trailing-comma es5 --no-semi --list-different",
+    "format:check:all": "npm run format:check -- 'src/**/*.js'"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
