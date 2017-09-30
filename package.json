@@ -10,10 +10,7 @@
   "version": "1.0.9",
   "scripts": {
     "clean": "rm -rf ./lib",
-    "test": "mocha --reporter spec --compilers js:babel-core/register 'src/**/*.test.js'",
-    "test:watch": "npm test -- --watch",
-    "test:single": "mocha --reporter spec --compilers js:babel-core/register",
-    "test:single:watch": "mocha --watch --reporter spec --compilers js:babel-core/register",
+    "test": "jest src/**/*.test.js",
     "prebundle": "npm run build",
     "bundle": "BABEL_ENV=browser browserify -t babelify lib/bundle.js -o dist/bundle.js",
     "postbundle": "./node_modules/uglify-es/bin/uglifyjs -o dist/bundle.min.js -c -m -- dist/bundle.js",
@@ -48,12 +45,8 @@
     "expect": "^1.20.2",
     "flow-bin": "^0.55.0",
     "jest": "^21.2.1",
-    "mocha": "^3.4.2",
     "prettier": "^1.3.1",
     "uglify-es": "^3.0.23"
-  },
-  "directories": {
-    "test": "test"
   },
   "dependencies": {
     "atob": "^2.0.3",
